@@ -1,3 +1,10 @@
+#ignore test files
+abbie_test.py
+brittney.py
+ellye.py
+jonathan_test.py
+michael.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
