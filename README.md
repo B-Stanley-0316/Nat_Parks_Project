@@ -8,6 +8,10 @@ This machine learning program analyzes national park data on biodiversity and pa
 
 ## Project Overview:
 
+### Communication:
+1. Slack channel with all members included
+2. Email
+
 ### Data Sources:
 
 1. [Biodiversity Dataset:](https://www.kaggle.com/datasets/nationalparkservice/park-biodiversity?select=parks.csv)
@@ -35,3 +39,10 @@ Note: If we go with the plan B option, we could use no_endangered somehow.
 
 3. Dendogram classification algorithm to categorize the parks for direction of future investments.
     a. Categorizes the national parks into a hierarchy based on the features: popularity_score, rating, no_visits, no_species, no_classes, no_families
+
+
+### Database Structure: 
+
+Below is an ERD describing the 3 tables we will use in this analysis:
+
+![ERD File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/ERD.png)
