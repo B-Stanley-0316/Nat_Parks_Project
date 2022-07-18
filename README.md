@@ -8,6 +8,10 @@ This machine learning program analyzes national park data on biodiversity and pa
 
 ## Project Overview:
 
+### Communication:
+1. Slack channel with all members included
+2. Email
+
 ### Data Sources:
 
 1. [Biodiversity Dataset:](https://www.kaggle.com/datasets/nationalparkservice/park-biodiversity?select=parks.csv)
