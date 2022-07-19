@@ -23,9 +23,14 @@
 # graph 3d model of scatter plot using PCA values
 
 
+
+
+
+
 # # Use Supervised Learning to explore the data and relationships
 
 # Both Multiple/Linear Regression Model - species id, trail, occurrence, abundance (etc)
+    # 1.Trail popularity (or avg trail popularity per park) w/ biodiversity (species count per park)
 
 # Random Forest Model
 
