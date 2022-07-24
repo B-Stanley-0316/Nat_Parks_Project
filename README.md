@@ -78,3 +78,5 @@ Below is an ERD describing the 3 tables we will use in this analysis:
 1. Interactive map is created to show the most popular parks and their locations with information on trail count, acres, and park name when hovering over data point on map.
 
 2. Interactive bar chart to display the top 15 Parks to visit based on average popularity, trail count is shown with shading, number of acres are shown outside of the bar. More information is given when hovering over bar on the graph.
+
+**TEST**
