@@ -3,8 +3,8 @@
 This machine learning program analyzes national park data on biodiversity and park trail popularity to suggest the best location for the next national park. Our project seeks to answer the following questions:
 
 1. Does biodiversity have a correllation with park popularity?
-2. Where should the next park be built?
-3. What categories can we create to plan investment strategy? 
+2. What categories can we create to plan investment strategy? 
+3. Where should the next park be built?
 
 ## Project Overview:
 
@@ -28,37 +28,6 @@ This machine learning program analyzes national park data on biodiversity and pa
 
 [Link to Google Slides](https://docs.google.com/presentation/d/1K_Hdr0zkWgMWZNgbmpIYqnqNQ8xBo2TaI6PAxGkzRgg/edit?usp=sharing)
 
-### Machine Learning Models: 
-
-1. Linear regression to answer if biodiversity affects the popularity of the hike.
-
-    a. Hypothesis: If trail popularity is based on biodiversity, then parks with over 20 species in the park have over a 60 popularity score.
-    
-    b. Null Hypothesis: There is no relationship between the biodiversity and popularity if parks of over 20 species are more often to be less than 60 popularity.
-
-    c. Alternative Hypothesis: If trail popularity is not based on popularity, then parks will have less than 20 species will be above the mean in popularity.
-
-    d. Accepted score: Accepted p-value significance of < 0.05
-
-    **Note: If this does not correlate, we could also try to see if popularity negatively affects biodiversity, and repurpose the following algorithms.**
-
-2. Random forest model to predict in which states to build more national parks. Will categorize the states as desireable or not desireable for park investment.
-
-    a. Target variable: desireable
-
-    b. Dependent variables (features): popularity_score, rating, no_visits, no_species, no_classes, no_families
-
-    c. Accuracy score = .70 or higher
-
-    d. Perform feature importance and redesign features if needed.
-
-    **Note: If we go with the plan B option, we could use no_endangered somehow.**
-
-3. Dendogram classification algorithm to categorize the parks for direction of future investments.
-
-    a. Categorizes the national parks into a hierarchy based on the features: popularity_score, rating, no_visits, no_species, no_classes, no_families
-
-
 ### Database Structure: 
 
 Below is an ERD describing the 3 tables we will use in this analysis:
@@ -66,9 +35,83 @@ Below is an ERD describing the 3 tables we will use in this analysis:
 ![ERD File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/ERD.png)
 
 
-### Link to Tableau Dashboard
+### Machine Learning Models: 
+
+#### 1. Does biodiversity have a correllation with park popularity?
+
+##### Machine Learning models: Linear regression
+File: [ML_Linear_Model_Test](ML_Linear_Regression_Test.ipynb)
+
+    a. Hypothesis: If trail popularity is based on biodiversity, then parks with over 20 species in the park have over a 60 popularity score.
+    
+    b. Null Hypothesis: There is no relationship between the biodiversity and popularity if parks of over 20 species are more often to be less than 60 popularity.
+
+    c. Alternative Hypothesis: If trail popularity is not based on popularity, then parks will have less than 20 species will be above the mean in popularity.
+
+    d. Accepted score: Accepted accuracy score of 0.70
+
+##### Results: 
+The linear regression model showed no correlation, proving the null hypothesis to be true: There is no relationship between the biodiversity and popularity of the park. The accuracy score of the linear regression is -0.017, which is significantly below the threshold we set of 0.70. In the scatter plot and linear regression below, the popularity data points are so dispersed that the line is mainly horizontal and not aligned with the shape of the scatter plot. 
+
+![LinearRegressionResults](Resources/ML_Screenshots/regression_fitline.png)
+
+##### Potential Next Steps: 
+    a. Test linear regression or multiple linear regression on other data points to find the real driver of popularity.
+    b. Use the Yelp API to get park popularity by park for better predictions.
+    c. Use the Trails data set to test individual trail popularity with park biodiversity, or use multiple linear regression. 
+
+
+#### 2. What categories can we create to plan investment strategy? 
+
+##### Machine learning models: PCA and K-Means algorithms
+File: [ml_models.ipynb](ml_models.ipynb)
+
+##### Results:
+We used 4 categories of principal components to extract features of the trails dataset for further classification:
+
+[PCA Results](Resources/ML_Screenshots/PCA_results.png)
+
+Further K-Means analysis provided 4 main categories to direct trail investment:
+
+[K-Means Results](Resources/ML_Screenshots/scatter_3d_clustering.png)
+
+Trail classes and investment recommendations: 
+* Class 1: High popularity and biodiversity = Highest investment level
+* Class 2: Medium-high popularity and biodiversity = 2nd highest investment level
+* Class 3: Medium-low popularity and biodiversity = 3rd highest investment level
+* Class 4: Low popularity and biodiversity = lowest investment level
+
+#### 3. Where should the next park be built?
+
+##### Machine learning models: EasyEnsembleClassifier and RandomForest
+File: [ml_models.ipynb](ml_models.ipynb)
+
+##### Results: 
+We realized that the resulting machine learning model is predicting which state the parks are in based on trail use and biodiversity data, which is not what we are trying to accomplish here. 
+
+[Easy Ensemble Classifier Classification Report](Resources/ML_Screenshots/EEC_classification_report.png)
+
+[Random Forest Classifier Feature Importance](Resources/ML_Screenshots/RF_Feature_importance.png)
+
+##### Potential Next Steps: 
+    a. Re-run this analysis using Popularity as a predictor 
+    b. Re-run this analysis using Rating as a predictor
+
+
+### Tableau Dashboard
 
 [Link to Tableau Dashboard](https://public.tableau.com/app/profile/brittney.r.stanley/viz/Nat_Parks_Project/Parks_Map?publish=yes)
+
+#### Outline of Final Tableau Storyboard:
+* Line w/ scatter plot to show our Linear Regression results and show findings on relationship between biodiversity / popularity.
+* Heat map w/ states colored to represent categories for investment levels
+* Dashboard of Charts:
+    * Ranked by popularity
+    * Ranked by biodiversity
+    * Ranked by hiking difficulty_rating
+    * Ranked by Number of trails
+* Top 15 parks to visit!
+* (Nice to have) Feature of premiere state for next park
 
 #### Tools to be Used
 1. Tableau Worksheets to create visuals
