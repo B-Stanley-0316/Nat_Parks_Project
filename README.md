@@ -69,11 +69,11 @@ File: [ml_models.ipynb](ml_models.ipynb)
 ##### Results:
 We used 4 categories of principal components to extract features of the trails dataset for further classification:
 
-[PCA Results](Resources/ML_Screenshots/PCA_results.png)
+![PCA Results](Resources/ML_Screenshots/PCA_results.png)
 
 Further K-Means analysis provided 4 main categories to direct trail investment:
 
-[K-Means Results](Resources/ML_Screenshots/scatter_3d_clustering.png)
+![K-Means Results](Resources/ML_Screenshots/scatter_3d_clustering.png)
 
 Trail classes and investment recommendations: 
 * Class 1: High popularity and biodiversity = Highest investment level
