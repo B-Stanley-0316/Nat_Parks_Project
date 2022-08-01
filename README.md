@@ -89,9 +89,9 @@ File: [ml_models.ipynb](ml_models.ipynb)
 ##### Results: 
 We realized that the resulting machine learning model is predicting which state the parks are in based on trail use and biodiversity data, which is not what we are trying to accomplish here. 
 
-[Easy Ensemble Classifier Classification Report](Resources/ML_Screenshots/EEC_classification_report.png)
+![Easy Ensemble Classifier Classification Report](Resources/ML_Screenshots/EEC_classification_report.png)
 
-[Random Forest Classifier Feature Importance](Resources/ML_Screenshots/RF_Feature_importance.png)
+![Random Forest Classifier Feature Importance](Resources/ML_Screenshots/RF_Feature_importance.png)
 
 ##### Potential Next Steps: 
     a. Re-run this analysis using Popularity as a predictor 
