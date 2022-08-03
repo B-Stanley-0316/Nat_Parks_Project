@@ -42,6 +42,11 @@ Below is the "trails" database as an example:
 
 Using the "join" SQL code, we were able to make the first workable combined table we will then use for the linear regression analysis.
 
+We did 3 key actions here:
+* We **joined data from the 2 tables**
+* Created a counted data column that **counted the number of trails** per park from the trails_db and **joined that count to parks_db**
+* Created a counted data column that **counted the number of species** present per park from the bio_db and **joined that count to parks_db**
+
 ![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/DB_screenshots/parks_trails_db.png)
 
 
