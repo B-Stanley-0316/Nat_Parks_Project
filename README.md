@@ -81,17 +81,18 @@ Trail classes and investment recommendations:
 * Class 3: Medium-low popularity and biodiversity = 3rd highest investment level
 * Class 4: Low popularity and biodiversity = lowest investment level
 
-#### 3. Where should the next park be built?
+#### 3. What trail features most affect average rating? 
 
 ##### Machine learning models: EasyEnsembleClassifier and RandomForest
 File: [ml_models.ipynb](ml_models.ipynb)
 
+Features: elevation gain, length, difficulty rating, feature availability, activity availability
+Target Variable: average rating
+
 ##### Results: 
-We realized that the resulting machine learning model is predicting which state the parks are in based on trail use and biodiversity data, which is not what we are trying to accomplish here. 
+The resulting accuacy score for our Easy Ensemble Classifier model fit with the trail rating and feature data was low at 0.08. Using the feature importance technique of the Random Forest Classifier, we identified 15 fields which affected the data above 0.02, and used only these fields to rerun the models. 
 
-![Easy Ensemble Classifier Classification Report](Resources/ML_Screenshots/EEC_classification_report.png)
-
-![Random Forest Classifier Feature Importance](Resources/ML_Screenshots/RF_Feature_importance.png)
+The second run with only 15 of the trails fields resulted in an accuracy score of 0.11. This low score further supports our findings that the popularity and rating data is very subjective and depends on individual preferences. However, we used the feature importance of the random forest model to find that the most significant fields for predicting average rating were trail eleveation gain and length.  
 
 ##### Potential Next Steps: 
     a. Re-run this analysis using Popularity as a predictor 
@@ -103,15 +104,15 @@ We realized that the resulting machine learning model is predicting which state 
 [Link to Tableau Dashboard](https://public.tableau.com/app/profile/brittney.r.stanley/viz/Nat_Parks_Project/Parks_Map?publish=yes)
 
 #### Outline of Final Tableau Storyboard:
-* Line w/ scatter plot to show our Linear Regression results and show findings on relationship between biodiversity / popularity.
-* Heat map w/ states colored to represent categories for investment levels
+* Use the irrelevance of popularity to highlight in a chart - somehow a chart with 2 features. (parks_pop_bio.csv)
+* Circle map colored to represent categories for investment levels
 * Dashboard of Charts:
     * Ranked by popularity
     * Ranked by biodiversity
     * Ranked by hiking difficulty_rating
     * Ranked by Number of trails
 * Top 15 parks to visit!
-* (Nice to have) Feature of premiere state for next park
+* Maps that play with elevation and plot some trails - map to rating data
 
 #### Tools to be Used
 1. Tableau Worksheets to create visuals
@@ -133,6 +134,11 @@ We realized that the resulting machine learning model is predicting which state 
 
 We attempted averaging the popularity data by park, which standardized it for the linear regression, but effectively changed the data. In reality, popularity of park is very subjective. 
 
+2. Unable to answer original question "What state should we build the next park?". 
+
+In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
+
+3. Popularity and Rating are very subjective and difficult to make predictions based on this. 
 
 
 ### Question ideas:
@@ -148,3 +154,4 @@ What trail features best indicate park rating?
 - elev gain?
 - features? out-back, or loop? 
 - route type
+
