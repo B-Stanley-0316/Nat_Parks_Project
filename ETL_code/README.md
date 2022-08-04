@@ -34,6 +34,21 @@ Below is an ERD describing the 3 tables we will use in this analysis:
 
 ![ERD File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/ERD.png)
 
+After completing the ETL process on the parks, trail data, and biodiversity tables we chose to use, we imported them into PostgreS. From here we can run counts and merges in a more visually appealing environment outside of Pandas.
+
+Below is the "trails" database as an example:
+
+![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/DB_screenshots/trails_db.png)
+
+Using the "join" SQL code, we were able to make the first workable combined table we will then use for the linear regression analysis.
+
+We did 3 key actions here:
+* We **joined data from the 2 tables**
+* Created a counted data column that **counted the number of trails** per park from the trails_db and **joined that count to parks_db**
+* Created a counted data column that **counted the number of species** present per park from the bio_db and **joined that count to parks_db**
+
+![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/DB_screenshots/parks_trails_db.png)
+
 
 ### Machine Learning Models: 
 
