@@ -84,7 +84,7 @@ File: [ml_models.ipynb](ml_models.ipynb)
 ##### Results:
 We used 4 categories of principal components to extract features of the trails dataset for further classification:
 
-![PCA Results](project_code/Resources/ML_Screenshots/PCA_results.png)
+![PCA Results](project_code/Resources/ML_Screenshots/PCA_results.PNG)
 
 Further K-Means analysis provided 4 main categories to direct trail investment:
 
