@@ -32,13 +32,13 @@ This machine learning program analyzes national park data on biodiversity and pa
 
 Below is an ERD describing the 3 tables we will use in this analysis:
 
-![ERD File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/ERD.png)
+![ERD File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/project_code/Resources/ERD.png)
 
 After completing the ETL process on the parks, trail data, and biodiversity tables we chose to use, we imported them into PostgreS. From here we can run counts and merges in a more visually appealing environment outside of Pandas.
 
 Below is the "trails" database as an example:
 
-![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/DB_screenshots/trails_db.png)
+![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/project_code/Resources/DB_screenshots/trails_db.png)
 
 Using the "join" SQL code, we were able to make the first workable combined table we will then use for the linear regression analysis.
 
@@ -47,7 +47,7 @@ We did 3 key actions here:
 * Created a counted data column that **counted the number of trails** per park from the trails_db and **joined that count to parks_db**
 * Created a counted data column that **counted the number of species** present per park from the bio_db and **joined that count to parks_db**
 
-![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/Resources/DB_screenshots/parks_trails_db.png)
+![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/project_code/Resources/DB_screenshots/parks_trails_db.png)
 
 
 ### Machine Learning Models: 
@@ -68,7 +68,7 @@ File: [ML_Linear_Model_Test](ML_Linear_Regression_Test.ipynb)
 ##### Results: 
 The linear regression model showed no correlation, proving the null hypothesis to be true: There is no relationship between the biodiversity and popularity of the park. The accuracy score of the linear regression is -0.017, which is significantly below the threshold we set of 0.70. In the scatter plot and linear regression below, the popularity data points are so dispersed that the line is mainly horizontal and not aligned with the shape of the scatter plot. 
 
-![LinearRegressionResults](Resources/ML_Screenshots/regression_fitline.png)
+![LinearRegressionResults](project_code/Resources/ML_Screenshots/regression_fitline.png)
 
 ##### Potential Next Steps: 
     a. Test linear regression or multiple linear regression on other data points to find the real driver of popularity.
@@ -84,11 +84,11 @@ File: [ml_models.ipynb](ml_models.ipynb)
 ##### Results:
 We used 4 categories of principal components to extract features of the trails dataset for further classification:
 
-![PCA Results](Resources/ML_Screenshots/PCA_results.png)
+![PCA Results](project_code/Resources/ML_Screenshots/PCA_results.PNG)
 
 Further K-Means analysis provided 4 main categories to direct trail investment:
 
-![K-Means Results](Resources/ML_Screenshots/scatter_3d_clustering.png)
+![K-Means Results](project_code/Resources/ML_Screenshots/scatter_3d_clustering.png)
 
 Trail classes and investment recommendations: 
 * Class 1: High popularity and biodiversity = Highest investment level
