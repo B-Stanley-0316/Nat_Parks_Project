@@ -116,7 +116,7 @@ The second run with only 15 of the trails fields resulted in an accuracy score o
 
 ### Tableau Dashboard
 
-[Link to Tableau Dashboard](https://public.tableau.com/app/profile/brittney.r.stanley/viz/Parks_Presentation_16598841285810/Dashboard2?publish=yes)
+[Link to Tableau Dashboard](https://public.tableau.com/app/profile/brittney.r.stanley/viz/Parks_Presentation_16598841285810/Storyboard?publish=yes)
 
 #### Outline of Final Tableau Storyboard:
 * Use the irrelevance of popularity to highlight in a chart - somehow a chart with 2 features. (parks_pop_bio.csv)
