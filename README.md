@@ -1,14 +1,26 @@
 # Nat_Parks_Project
 
-This machine learning program analyzes national park data on biodiversity and park trail popularity to suggest the best location for the next national park. Our project seeks to answer the following questions:
+**Project Goals**
+
+Our team aims to work with the United States National Park Service to better understand more than 400 national parks spanning 84 million acres. Through our analysis below, we aim to use machine learning and tableau visualizations to equip our stakeholders with the tools to answer the below questions:
 
 1. Does biodiversity have a correlation with park popularity?
 2. What categories can we create to plan investment strategy? 
 3. What trail features most affect average rating?
 
+As avid nature lovers ourselves, we understand the importance of our National Parks. We want to aid the department in harnessing the power of data analytics to attract more visitors to the hidden beautiful landscapes the United States has to offer.
+
 ## Project Overview:
 
-### Data Sources:
+### Google Slides PowerPoint
+
+[Link to Google Slides](https://docs.google.com/presentation/d/1K_Hdr0zkWgMWZNgbmpIYqnqNQ8xBo2TaI6PAxGkzRgg/edit?usp=sharing)
+
+### Data Pipeline
+
+Our team used Kaggle to source two datasets in CSV Format:
+
+#### Data Sources:
 
 1. [Biodiversity Dataset:](https://www.kaggle.com/datasets/nationalparkservice/park-biodiversity?select=parks.csv)
 
@@ -20,17 +32,14 @@ This machine learning program analyzes national park data on biodiversity and pa
 
     a. AllTrails data - nationalpark.csv (3288 values)
 
-### Google Slides PowerPoint
 
-[Link to Google Slides](https://docs.google.com/presentation/d/1K_Hdr0zkWgMWZNgbmpIYqnqNQ8xBo2TaI6PAxGkzRgg/edit?usp=sharing)
-
-### Database Structure: 
+#### Database Structure: 
 
 Below is an ERD describing the 3 tables we will use in this analysis:
 
 ![ERD File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/project_code/Resources/ERD.png)
 
-After completing the ETL process on the parks, trail data, and biodiversity tables we chose to use, we imported them into PostgreS. From here we can run counts and merges in a more visually appealing environment outside of Pandas.
+After using Jupyter Notebook to initiate the ETL process on the parks, trail data, and biodiversity tables we chose to use, we saved them as CSV files. We imported the CSV files into PGAdmin in order to run counts and merges in a more visually appealing environment outside of Pandas.
 
 Below is the "trails" database as an example:
 
@@ -45,6 +54,9 @@ Using the "join" SQL code, we were able to make the first workable combined tabl
 
 ![DB File](https://github.com/B-Stanley-0316/Nat_Parks_Project/blob/main/project_code/Resources/DB_screenshots/parks_trails_db.png)
 
+#### Data Destination
+
+Upon completing the joins in PGAdmin, we exported the new table as a CSV and imported into Jupyter Notebook in order to continue our analysis and initiate the machine learning modelling.
 
 ### Machine Learning Models: 
 
@@ -131,9 +143,10 @@ File: [ml_models.ipynb](ml_models.ipynb)
 Features: elevation gain, length, difficulty rating, feature availability, activity availability
 Target Variable: average rating
 
-Since we found that biodiviersity is not a good indicator of trail popularity, and that popularity largely correlated with average rating, we wanted to perform classification models on only trail features to predict the average rating of a trail. We used Easy Ensemble Classifier to test the accuracy of our data analysis. Then, using the Random Forest model to classify parks by average rating, we used the feature_importances module to see which trail features most influenced their rating. The following fields with a # below had to be encoded into numeric format in order to be used in our machine learning models:
+Since we found that biodiversity is not a good indicator of trail popularity, and that popularity largely correlated with average rating, we wanted to perform classification models on only trail features to predict the average rating of a trail. We used Easy Ensemble Classifier to test the accuracy of our data analysis. Then, using the Random Forest model to classify parks by average rating, we used the feature_importances module to see which trail features most influenced their rating. The following fields with a # below had to be encoded into numeric format in order to be used in our machine learning models:
 
-Feature selection: 
+**Feature selection:**
+
 Trail features:
 * length
 * elevation gain
@@ -142,21 +155,20 @@ Trail features:
 * features # 
 * activities #
 
-
-
 ##### Results: 
 The resulting accuracy score for our Easy Ensemble Classifier model fit with the trail rating and feature data was low at 0.08. Using the feature importance technique of the Random Forest Classifier, we identified 15 fields which affected the data above 0.02, and used only these fields to rerun the models. 
 
-The second run with only 15 of the trails fields resulted in an accuracy score of 0.11. This low score further supports our findings that the popularity and rating data is very subjective and depends on individual preferences. However, we used the feature importance of the random forest model to find that the most significant fields for predicting average rating were trail eleveation gain and length.
+The second run with only 15 of the trails fields resulted in an accuracy score of 0.11. This low score further supports our findings that the popularity and rating data is very subjective and depends on individual preferences. 
 
 ![EEC Model Results](project_code/Resources/ML_Screenshots/EEC_model_results_FINAL.PNG)
 
+We generated an Imbalanced Classification Report for our model:
 
 ![EEC Classification Report](project_code/Resources/ML_Screenshots/EEC_classification_report_FINAL.PNG)
 
+However, we used the feature importance of the random forest model to find that the most significant fields for predicting average rating were trail eleveation gain and length:
 
 ![Random Forest - Feature Importance](project_code/Resources/ML_Screenshots/RF_Feature_importances_FINAL.PNG)
-
 
 
 ##### Suggested Next Steps: 
@@ -179,7 +191,7 @@ The second run with only 15 of the trails fields resulted in an accuracy score o
 * Top 15 parks to visit!
 * Maps that play with elevation and plot some trails - map to rating data
 
-#### Tools to be Used
+#### Tools Used
 1. Tableau Worksheets to create visuals
 
 2. Tableau Dashboard to present created visuals with details
@@ -187,6 +199,7 @@ The second run with only 15 of the trails fields resulted in an accuracy score o
 3. Saved to Tableau Public and shared as a link for interactive dashboard
 
 #### Interactive Tools
+
 1. Interactive map is created to show the most popular parks and their locations with information on trail count, acres, and park name when hovering over data point on map.
 
 2. Interactive bar chart to display the top 15 Parks to visit based on average popularity, trail count is shown with shading, number of acres are shown outside of the bar. More information is given when hovering over bar on the graph.
@@ -204,19 +217,3 @@ We attempted averaging the popularity data by park, which standardized it for th
 In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
 
 3. Popularity and Rating are very subjective and difficult to make predictions based on this. 
-
-
-### Question ideas:
-
-Does the popularity of a park negatively affect biodiversity (i.e. more species with a conservation status/ higher conservation status number)
-
-What we do know:
-- popularity score is generated by rating, number of ratings
-- popular trails are not necessarily biodiverse (to protect the environment)
-
-What trail features best indicate park rating? 
-- length? 
-- elev gain?
-- features? out-back, or loop? 
-- route type
-
