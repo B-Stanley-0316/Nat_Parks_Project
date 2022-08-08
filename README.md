@@ -2,15 +2,11 @@
 
 This machine learning program analyzes national park data on biodiversity and park trail popularity to suggest the best location for the next national park. Our project seeks to answer the following questions:
 
-1. Does biodiversity have a correllation with park popularity?
+1. Does biodiversity have a correlation with park popularity?
 2. What categories can we create to plan investment strategy? 
-3. Where should the next park be built?
+3. What trail features most affect average rating?
 
 ## Project Overview:
-
-### Communication:
-1. Slack channel with all members included
-2. Email
 
 ### Data Sources:
 
@@ -42,7 +38,7 @@ Below is the "trails" database as an example:
 
 Using the "join" SQL code, we were able to make the first workable combined table we will then use for the linear regression analysis.
 
-We did 3 key actions here:
+3 key actions:
 * We **joined data from the 2 tables**
 * Created a counted data column that **counted the number of trails** per park from the trails_db and **joined that count to parks_db**
 * Created a counted data column that **counted the number of species** present per park from the bio_db and **joined that count to parks_db**
@@ -52,7 +48,7 @@ We did 3 key actions here:
 
 ### Machine Learning Models: 
 
-#### 1. Does biodiversity have a correllation with park popularity?
+#### 1. Does biodiversity have a correlation with park popularity?
 
 ##### Machine Learning models: Linear regression
 File: [ML_Linear_Model_Test](ML_Linear_Regression_Test.ipynb)
@@ -65,12 +61,17 @@ File: [ML_Linear_Model_Test](ML_Linear_Regression_Test.ipynb)
 
     d. Accepted score: Accepted accuracy score of 0.70
 
+To test our hypothesis that the biodiversity of a park influences the popularity of the trails, we ran a linear regression model to check for correlation. We chose to use the parks dataframe for this test, with the average trail popularity grouped by park, and the total distinct species count per park. 
+
+Independent variable (x): Biodiversity (species count)
+Dependent variable (y): Average trail popularity
+
 ##### Results: 
 The linear regression model showed no correlation, proving the null hypothesis to be true: There is no relationship between the biodiversity and popularity of the park. The accuracy score of the linear regression is -0.017, which is significantly below the threshold we set of 0.70. In the scatter plot and linear regression below, the popularity data points are so dispersed that the line is mainly horizontal and not aligned with the shape of the scatter plot. 
 
 ![LinearRegressionResults](project_code/Resources/ML_Screenshots/regression_fitline.png)
 
-##### Potential Next Steps: 
+##### Suggested Next Steps: 
     a. Test linear regression or multiple linear regression on other data points to find the real driver of popularity.
     b. Use the Yelp API to get park popularity by park for better predictions.
     c. Use the Trails data set to test individual trail popularity with park biodiversity, or use multiple linear regression. 
@@ -81,10 +82,36 @@ The linear regression model showed no correlation, proving the null hypothesis t
 ##### Machine learning models: PCA and K-Means algorithms
 File: [ml_models.ipynb](ml_models.ipynb)
 
+In order to identify the most appropriate way to classify the data into categories of similar trails for funding purposes, we used unsupervised machine learning model techniques including PCA and K-Means algorithms. This took many different data fields from biodiversity and trail use data in one data frame: Biodversity data was aggregated by park in order to be added to the trails dataframe. 
+
+Feature selection: When testing for correlation in the trails dataframe with the pandas .corr() method, we found that average rating and the number of reviews highly rated with popularity. We chose to remove these fields from the machine learning data in order for them to not be overly influential, and decided to only use popularity. The following fields with a # below had to be encoded into numeric format in order to be used in our machine learning models:
+
+Features from trails dataframe included in unsupervised machine learning:
+
+Trail features: 
+* popularity
+* length
+* elevation
+* difficulty
+* route type #
+* features count #
+* activities count #
+
+Biodiversity features:
+* species count 
+* biological category count 
+* abundance total (number of species not considered uncommon)
+* conservation total (number of species with conservation status)
+
 ##### Results:
 We used 4 categories of principal components to extract features of the trails dataset for further classification:
 
 ![PCA Results](project_code/Resources/ML_Screenshots/PCA_results.PNG)
+
+We created an elbow curve to find the best value for K:
+
+![K-Means Elbow Chart](project_code/Resources/ML_Screenshots/Elbow_chart_K-MEANS.PNG)
+
 
 Further K-Means analysis provided 4 main categories to direct trail investment:
 
@@ -104,12 +131,35 @@ File: [ml_models.ipynb](ml_models.ipynb)
 Features: elevation gain, length, difficulty rating, feature availability, activity availability
 Target Variable: average rating
 
+Since we found that biodiviersity is not a good indicator of trail popularity, and that popularity largely correlated with average rating, we wanted to perform classification models on only trail features to predict the average rating of a trail. We used Easy Ensemble Classifier to test the accuracy of our data analysis. Then, using the Random Forest model to classify parks by average rating, we used the feature_importances module to see which trail features most influenced their rating. The following fields with a # below had to be encoded into numeric format in order to be used in our machine learning models:
+
+Feature selection: 
+Trail features:
+* length
+* elevation gain
+* difficulty rating
+* route type #
+* features # 
+* activities #
+
+
+
 ##### Results: 
-The resulting accuacy score for our Easy Ensemble Classifier model fit with the trail rating and feature data was low at 0.08. Using the feature importance technique of the Random Forest Classifier, we identified 15 fields which affected the data above 0.02, and used only these fields to rerun the models. 
+The resulting accuracy score for our Easy Ensemble Classifier model fit with the trail rating and feature data was low at 0.08. Using the feature importance technique of the Random Forest Classifier, we identified 15 fields which affected the data above 0.02, and used only these fields to rerun the models. 
 
-The second run with only 15 of the trails fields resulted in an accuracy score of 0.11. This low score further supports our findings that the popularity and rating data is very subjective and depends on individual preferences. However, we used the feature importance of the random forest model to find that the most significant fields for predicting average rating were trail eleveation gain and length.  
+The second run with only 15 of the trails fields resulted in an accuracy score of 0.11. This low score further supports our findings that the popularity and rating data is very subjective and depends on individual preferences. However, we used the feature importance of the random forest model to find that the most significant fields for predicting average rating were trail eleveation gain and length.
 
-##### Potential Next Steps: 
+![EEC Model Results](project_code/Resources/ML_Screenshots/EEC_model_results_FINAL.PNG)
+
+
+![EEC Classification Report](project_code/Resources/ML_Screenshots/EEC_classification_report_FINAL.PNG)
+
+
+![Random Forest - Feature Importance](project_code/Resources/ML_Screenshots/RF_Feature_importances_FINAL.PNG)
+
+
+
+##### Suggested Next Steps: 
     a. Re-run this analysis using Popularity as a predictor 
     b. Re-run this analysis using Rating as a predictor
 
