@@ -58,11 +58,11 @@ Using the "join" SQL code, we were able to make the first workable combined tabl
 
 Upon completing the joins in PGAdmin, we exported the new table as a CSV and imported into Jupyter Notebook in order to continue our analysis and initiate the machine learning modelling.
 
-### Machine Learning Models: 
+## Machine Learning Analysis: Models, Results, and Next Steps.
 
-#### 1. Does biodiversity have a correlation with park popularity?
+### 1. Does biodiversity have a correlation with park popularity?
 
-##### Machine Learning models: Linear regression
+#### Algorithm: Linear regression
 File: [ML_Linear_Model_Test](ML_Linear_Regression_Test.ipynb)
 
     a. Hypothesis: If trail popularity is based on biodiversity, then parks with over 20 species in the park have over a 60 popularity score.
@@ -78,20 +78,34 @@ To test our hypothesis that the biodiversity of a park influences the popularity
 Independent variable (x): Biodiversity (species count)
 Dependent variable (y): Average trail popularity
 
-##### Results: 
+#### Results: 
 The linear regression model showed no correlation, proving the null hypothesis to be true: There is no relationship between the biodiversity and popularity of the park. The accuracy score of the linear regression is -0.017, which is significantly below the threshold we set of 0.70. In the scatter plot and linear regression below, the popularity data points are so dispersed that the line is mainly horizontal and not aligned with the shape of the scatter plot. 
 
 ![LinearRegressionResults](project_code/Resources/ML_Screenshots/regression_fitline.png)
 
-##### Suggested Next Steps: 
-    a. Test linear regression or multiple linear regression on other data points to find the real driver of popularity.
-    b. Use the Yelp API to get park popularity by park for better predictions.
-    c. Use the Trails data set to test individual trail popularity with park biodiversity, or use multiple linear regression. 
+To further explore the data, we used the .corr() method on the trail popularity dataset in order to see which trail features were correlated. The results below show that number of reviews was the closest correlated field to popularity, with 0.86 correlation. Additionally, the trail difficulty is correlated with elevation_gain. 
+
+![TrailFeaturesCorrelations](project_code/Resources/ML_Screenshots/Trail_Popularity_corr_model.PNG)
+
+The fact that popularity is correlated to number of reviews, but not correlated (0.29) to average rating showed us two things:
+1. Reviews are subjective. People will rate the park based on their own individual experience and expectations. 
+2. If average rating is not correlated to trail popularity, then there must be some hidden gem trails with high ratings and low number of reviews that we should find and present to the parks service for additional marketing investment. 
+
+#### Suggested Next Steps: 
+1. Test linear regression or multiple linear regression on other data points to find the real driver of popularity.
+    a. Use the Yelp API to get popularity by park for better predictions.
+    b. Use a Random Forest model to predict average rating as a category. 
+    c. Use the Trails data set to test individual trail popularity with park biodiversity using multiple linear regression on several trail features.
+    d. Add calculated fields such as trails per acre and species per acre.
+
+2. Does trail popularity negatively affect biodiversity? 
+    a. Use the number of species with a conservation status listed as the target variable. 
 
 
-#### 2. What categories can we create to plan investment strategy? 
 
-##### Machine learning models: PCA and K-Means algorithms
+### 2. What categories can we create to plan investment strategy? 
+
+#### Machine learning models: PCA and K-Means algorithms
 File: [ml_models.ipynb](ml_models.ipynb)
 
 In order to identify the most appropriate way to classify the data into categories of similar trails for funding purposes, we used unsupervised machine learning model techniques including PCA and K-Means algorithms. This took many different data fields from biodiversity and trail use data in one data frame: Biodversity data was aggregated by park in order to be added to the trails dataframe. 
@@ -115,7 +129,7 @@ Biodiversity features:
 * abundance total (number of species not considered uncommon)
 * conservation total (number of species with conservation status)
 
-##### Results:
+#### Results:
 We used 4 categories of principal components to extract features of the trails dataset for further classification:
 
 ![PCA Results](project_code/Resources/ML_Screenshots/PCA_results.PNG)
@@ -125,19 +139,20 @@ We created an elbow curve to find the best value for K:
 ![K-Means Elbow Chart](project_code/Resources/ML_Screenshots/Elbow_chart_K-MEANS.PNG)
 
 
-Further K-Means analysis provided 4 main categories to direct trail investment:
+Further K-Means analysis provided 5 main categories to direct trail investment:
 
 ![K-Means Results](project_code/Resources/ML_Screenshots/scatter_3d_clustering.png)
 
-Trail classes and investment recommendations: 
-* Class 1: High popularity and biodiversity = Highest investment level
-* Class 2: Medium-high popularity and biodiversity = 2nd highest investment level
-* Class 3: Medium-low popularity and biodiversity = 3rd highest investment level
-* Class 4: Low popularity and biodiversity = lowest investment level
+Trail class characteristics for investment planning: 
+* Class 0: High biodiversity, low popularity
+* Class 1: Avg biodiversity, low popularity
+* Class 2: Avg biodiversity, low popularity (difficult trails)
+* Class 3: Avg biodiversity, high popularity
+* Class 4: Low biodiversity, low popularity 
 
-#### 3. What trail features most affect average rating? 
+### 3. What trail features most affect average rating? 
 
-##### Machine learning models: EasyEnsembleClassifier and RandomForest
+#### Machine learning models: EasyEnsembleClassifier and RandomForest
 File: [ml_models.ipynb](ml_models.ipynb)
 
 Features: elevation gain, length, difficulty rating, feature availability, activity availability
@@ -155,7 +170,7 @@ Trail features:
 * features # 
 * activities #
 
-##### Results: 
+#### Results: 
 The resulting accuracy score for our Easy Ensemble Classifier model fit with the trail rating and feature data was low at 0.08. Using the feature importance technique of the Random Forest Classifier, we identified 15 fields which affected the data above 0.02, and used only these fields to rerun the models. 
 
 The second run with only 15 of the trails fields resulted in an accuracy score of 0.11. This low score further supports our findings that the popularity and rating data is very subjective and depends on individual preferences. 
@@ -171,40 +186,43 @@ However, we used the feature importance of the random forest model to find that 
 ![Random Forest - Feature Importance](project_code/Resources/ML_Screenshots/RF_Feature_importances_FINAL.PNG)
 
 
-##### Suggested Next Steps: 
+#### Suggested Next Steps: 
     a. Re-run this analysis using Popularity as a predictor 
     b. Re-run this analysis using Rating as a predictor
 
 
-### Tableau Dashboard
+## Tableau Dashboard
 
 [Link to Tableau Dashboard](https://public.tableau.com/app/profile/brittney.r.stanley/viz/Parks_Presentation_16598841285810/Storyboard?publish=yes)
 
-#### Outline of Final Tableau Storyboard:
-* Use the irrelevance of popularity to highlight in a chart - somehow a chart with 2 features. (parks_pop_bio.csv)
-* Circle map colored to represent categories for investment levels
-* Dashboard of Charts:
-    * Ranked by popularity
-    * Ranked by biodiversity
-    * Ranked by hiking difficulty_rating
-    * Ranked by Number of trails
-* Top 15 parks to visit!
-* Maps that play with elevation and plot some trails - map to rating data
+### Outline of Final Tableau Storyboard:
+* Map of park popularity and biodiversity:
+    Visualize the lack of correlation with biodiversity and popularity shown as color and shape features. (use parks_pop_bio.csv)
+* Funding Class Comparison Dashboard:
+    Using interactive filters on funding class, two charts will show comparisons of biodiversity, trail difficulty, and trail popularity. 
+* Dashboard of Charts on Park general data:
+    * Top 13 most popular trails!
+    * Most biodiverse parks and their number of trails
+    * Number of ultra-popular trails per park (above 52.02 popularity)
+* Hidden Gem finder: 
+    * Most Popular trails with their rating and difficulty
+    * Least popular trails that are ranked 5-stars - Hidden Gems that should get increased marketing.
 
-#### Tools Used
+### Tools Used
 1. Tableau Worksheets to create visuals
 
 2. Tableau Dashboard to present created visuals with details
 
 3. Saved to Tableau Public and shared as a link for interactive dashboard
 
-#### Interactive Tools
+### Interactive Tools
 
 1. Interactive map is created to show the most popular parks and their locations with information on trail count, acres, and park name when hovering over data point on map.
 
-2. Interactive bar chart to display the top 15 Parks to visit based on average popularity, trail count is shown with shading, number of acres are shown outside of the bar. More information is given when hovering over bar on the graph.
+2. Interactive bar chart to display the top 13 Parks to visit based on average popularity, trail count is shown with shading, number of acres are shown outside of the bar. More information is given when hovering over bar on the graph.
 
 
+## Summary
 
 ### Project Limitations
 
@@ -212,8 +230,13 @@ However, we used the feature importance of the random forest model to find that 
 
 We attempted averaging the popularity data by park, which standardized it for the linear regression, but effectively changed the data. In reality, popularity of park is very subjective. 
 
+Our future recommendation is to use the Yelp API to get popularity data by park. 
+
 2. Unable to answer original question "What state should we build the next park?". 
 
 In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
+
+Our future recommendation is to work with National Parks Service stakeholders to understand priorities for trails in the next parkand get updated usage data for similar trails. 
+
 
 3. Popularity and Rating are very subjective and difficult to make predictions based on this. 
