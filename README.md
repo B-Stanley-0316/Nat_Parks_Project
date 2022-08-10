@@ -1,4 +1,4 @@
-# Nat_Parks_Project
+# National Parks Project
 
 **Project Goals**
 
@@ -63,7 +63,7 @@ Upon completing the joins in PGAdmin, we exported the new table as a CSV and imp
 ### 1. Does biodiversity have a correlation with park popularity?
 
 #### Algorithm: Linear regression
-File: [ML_Linear_Model_Test](ML_Linear_Regression_Test.ipynb)
+File: [ML_Linear_Model_Test](project_code/ML_Linear_Regression_Test.ipynb)
 
     a. Hypothesis: If trail popularity is based on biodiversity, then parks with over 20 species in the park have over a 60 popularity score.
     
@@ -106,7 +106,7 @@ The fact that popularity is correlated to number of reviews, but not correlated 
 ### 2. What categories can we create to plan investment strategy? 
 
 #### Machine learning models: PCA and K-Means algorithms
-File: [ml_models.ipynb](ml_models.ipynb)
+File: [ml_models.ipynb](project_code/ml_models.ipynb)
 
 In order to identify the most appropriate way to classify the data into categories of similar trails for funding purposes, we used unsupervised machine learning model techniques including PCA and K-Means algorithms. This took many different data fields from biodiversity and trail use data in one data frame: Biodversity data was aggregated by park in order to be added to the trails dataframe. 
 
@@ -153,7 +153,7 @@ Trail class characteristics for investment planning:
 ### 3. What trail features most affect average rating? 
 
 #### Machine learning models: EasyEnsembleClassifier and RandomForest
-File: [ml_models.ipynb](ml_models.ipynb)
+File: [ml_models.ipynb](project_code/ml_models.ipynb)
 
 Features: elevation gain, length, difficulty rating, feature availability, activity availability
 Target Variable: average rating
@@ -176,6 +176,10 @@ The resulting accuracy score for our Easy Ensemble Classifier model fit with the
 The second run with only 15 of the trails fields resulted in an accuracy score of 0.11. This low score further supports our findings that the popularity and rating data is very subjective and depends on individual preferences. 
 
 ![EEC Model Results](project_code/Resources/ML_Screenshots/EEC_model_results_FINAL.PNG)
+
+This is the confusion matrix for our model:
+
+![EEC_Confusion_matrix_FINAL](project_code/Resources/ML_Screenshots/EEC_Confusion_matrix_FINAL.png)
 
 We generated an Imbalanced Classification Report for our model:
 
@@ -235,6 +239,17 @@ Our future recommendation is to use the Yelp API to get popularity data by park.
 2. Unable to answer original question "What state should we build the next park?". 
 
     In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
+
+
+### What We Would do Differently
+
+1. We used biodiversity data per park, and popularity data per trail.
+    * Use park-level popularity data to better test correlation.
+	* Use the trail-level “wildlife” feature instead of park species count.
+2. Unable to answer original question "What state should we build the next park?"
+	* Agree with stakeholders on “ideal” trail conditions (i.e. difficulty, length, # of features).
+	* Find updated trail usage data.
+
 
 
 
