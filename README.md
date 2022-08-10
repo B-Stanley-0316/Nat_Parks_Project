@@ -210,13 +210,13 @@ However, we used the feature importance of the random forest model to find that 
 
 1. We used biodiversity data per park, and popularity data per trail.
 
-We attempted averaging the popularity data by park, which standardized it for the linear regression, but effectively changed the data. In reality, popularity of park is very subjective. 
+    We attempted averaging the popularity data by park, which standardized it for the linear regression, but effectively changed the data. In reality, popularity of park is very subjective. 
 
 2. Unable to answer original question "What state should we build the next park?". 
 
-In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
+    In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
 
-3. Popularity and Rating are very subjective and difficult to make predictions based on this. 
+3. Popularity and Rating are very subjective and difficult to make predictions based on these features. 
 
 ### What We Would Do Differently
 
