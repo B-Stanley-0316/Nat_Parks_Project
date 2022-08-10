@@ -228,25 +228,13 @@ However, we used the feature importance of the random forest model to find that 
 
 1. We used biodiversity data per park, and popularity data per trail.
 
-We attempted averaging the popularity data by park, which standardized it for the linear regression, but effectively changed the data. In reality, popularity of park is very subjective. 
+    We attempted averaging the popularity data by park, which standardized it for the linear regression, but effectively changed the data. In reality, popularity of park is very subjective. 
 
 Our future recommendation is to use the Yelp API to get popularity data by park. 
 
 2. Unable to answer original question "What state should we build the next park?". 
 
-In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
-
-Our future recommendation is to work with National Parks Service stakeholders to understand priorities for trails in the next parkand get updated usage data for similar trails. 
+    In order to answer this we would have to have values for if a state is desireable or undesireable - which we could assign using criteria in the original dataset, and it does not need machine learning.
 
 
-3. Popularity and Rating are very subjective and difficult to make predictions based on this. 
-
-### What We Would Do Differently
-
-1. We used biodiversity data per park, and popularity data per trail.
-    * Use park-level popularity data to better test correlation.
-    * Use the trail-level “wildlife” feature instead of park species count.
-2. Unable to answer original question "What state should we build the next park?"
-    * Agree with stakeholders on “ideal” trail conditions (i.e. difficulty, length, # of features).
-    * Find updated trail usage data.
 
