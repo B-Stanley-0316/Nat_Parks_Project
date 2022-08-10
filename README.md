@@ -1,4 +1,4 @@
-# Nat_Parks_Project
+# National Parks Project
 
 **Project Goals**
 
@@ -179,7 +179,7 @@ The second run with only 15 of the trails fields resulted in an accuracy score o
 
 This is the confusion matrix for our model:
 
-![EEC_Confusion_matrix_FINAL](project_code/Resources/ML_Screenshots/EEC_Confusion_matrix_FINAL.png
+![EEC_Confusion_matrix_FINAL](project_code/Resources/ML_Screenshots/EEC_Confusion_matrix_FINAL.png)
 
 We generated an Imbalanced Classification Report for our model:
 
