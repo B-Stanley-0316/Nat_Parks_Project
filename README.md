@@ -240,3 +240,13 @@ Our future recommendation is to work with National Parks Service stakeholders to
 
 
 3. Popularity and Rating are very subjective and difficult to make predictions based on this. 
+
+### What We Would Do Differently
+
+1. We used biodiversity data per park, and popularity data per trail.
+    * Use park-level popularity data to better test correlation.
+    * Use the trail-level “wildlife” feature instead of park species count.
+2. Unable to answer original question "What state should we build the next park?"
+    * Agree with stakeholders on “ideal” trail conditions (i.e. difficulty, length, # of features).
+    * Find updated trail usage data.
+
